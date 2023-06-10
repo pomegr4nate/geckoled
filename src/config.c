@@ -80,6 +80,13 @@ char try_load_ini(const char* path, config_t* config)
 
 char read_ini_line(char* key, config_t* config)
 {
+	int total_length = strlen(key);
+	
+	if (total_length == 0 || (total_length == 1 && key[0] == '\n'))
+	{
+		return 1;
+	}
+	
 	char* value = strchr(key, '=');
 	
 	if (!value)
