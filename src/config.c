@@ -14,6 +14,7 @@ static const int NUM_DEFAULT_PATHS =
 	sizeof(DEFAULT_PATHS) / sizeof(DEFAULT_PATHS[0]);
 
 char read_ini_line(char* key, config_t* config);
+void trim_inplace(char* str);
 
 config_t* load_config()
 {
@@ -101,13 +102,11 @@ char read_ini_line(char* key, config_t* config)
 		return 0;
 	}
 	
-	if (*(value + value_length - 1) == '\n')
-	{
-		*(value + value_length - 1) = 0;
-	}
-	
 	*value = 0;
 	value += 1;
+
+	trim_inplace(key);
+	trim_inplace(value);
 	
 	// TODO: Add options to read here
 	//
@@ -124,4 +123,27 @@ char read_ini_line(char* key, config_t* config)
 	//
 	
 	return 0;
+}
+
+void trim_inplace(char* str)
+{
+	char* start = str;
+	char* end = str + strlen(str) - 1;
+
+	while (*start && (*start == ' ' || *start == '\t' || *start == '\n'))
+	{
+		start++;
+	}
+
+	while (end >= start && (*end == ' ' || *end == '\t' || *end == '\n'))
+	{
+		end--;
+	}
+
+	while (start <= end)
+	{
+		*(str++) = *(start++);
+	}
+
+	*str = 0;
 }
