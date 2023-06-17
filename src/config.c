@@ -6,6 +6,9 @@
 static const size_t MAX_LINE_LENGTH = 256;
 static const char* DEFAULT_PATHS[] =
 {
+	"/etc/geckoled.conf",
+	"geckoled.conf",
+	"config.conf",
 	"/etc/geckoled.ini",
 	"geckoled.ini",
 	"config.ini"
