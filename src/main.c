@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "config.h"
 
 int main()
 {
-	printf("Starting.");
-	// TODO: Yes.
-	printf("Exiting.");
+	config_t* config = load_config();
+	
+	printf("Starting.\n");
+	
+	printf("Exiting.\n");
+	
+	free_config(config);
 	exit(0);
 }
