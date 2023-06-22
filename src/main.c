@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "config.h"
 #include "handlers.h"
+#include "renderer.h"
 
 // Config struct
 config_t* config
@@ -17,6 +18,7 @@ int main()
 	
 	printf("Starting.\n");
 
+    setup_renderer();
 
 	exit(0);
 }
