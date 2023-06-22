@@ -2,6 +2,7 @@
 #include "handlers.h"
 #include <stdio.h>
 #include <pthread.h>
+#include <unistd.h>
 #include "../rpi_ws281x/ws2811.h"
 #include "config.h"
 
@@ -21,5 +22,10 @@ void *renderer(void *arg) {
 			kill_handler();
 			break;
 		}
+
+		// 15 frames /sec
+		usleep(1000000 / 15);
 	}
+
+	return NULL;
 }
