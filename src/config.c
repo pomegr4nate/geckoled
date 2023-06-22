@@ -27,6 +27,11 @@ void load_config() {
 	memset(config, 0, sizeof(config_t));
 
 	// Default values
+	config->width = 1;
+	config->height = 1;
+	config->start_position=1;
+	config->led_offset=0;
+
 	config->ledstring->freq = WS2811_TARGET_FREQ, // Only one option, no need for user configuration
 	config->ledstring->dmanum = 10;
 	config->ledstring->channel[0].gpionum = 18;
@@ -40,11 +45,14 @@ void load_config() {
 	// Needed for some reason (from Library)
 	config->ledstring->channel[1].gpionum = 0;
 	config->ledstring->channel[1].invert = 0;
-	config->ledstring->channel[1].count = 0;
+	config->ledstring->channel[1].count = config->width * config->height;
 	config->ledstring->channel[1].brightness = 0;
 
 	for (int i = 0; i < NUM_DEFAULT_PATHS; ++i) {
 		if (try_load_ini(DEFAULT_PATHS[i])) {
+			// Set LED count based on width and height
+			config->ledstring->channel[1].count = config->width * config->height;
+
 			return;
 		}
 	}
@@ -134,9 +142,23 @@ char read_ini_line(char *key) {
 		return 1;
 	}
 
-	// TODO Maybe add width and height and calculate this value
-	if (strcmp(key, "led_count") == 0) {
-		config->ledstring->channel[0].count = atoi(value);
+	if (strcmp(key, "width") == 0) {
+		config->width = atoi(value);
+		return 1;
+	}
+
+	if (strcmp(key, "height") == 0) {
+		config->height = atoi(value);
+		return 1;
+	}
+
+	if (strcmp(key, "start_position") == 0) {
+		config->start_position = atoi(value);
+		return 1;
+	}
+
+	if (strcmp(key, "led_offset") == 0) {
+		config->led_offset = atoi(value);
 		return 1;
 	}
 
