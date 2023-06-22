@@ -5,7 +5,7 @@
 #include "renderer.h"
 
 // Config struct
-config_t* config
+config_t* config;
 // If the led renderer should be running
 int running = 1;
 
