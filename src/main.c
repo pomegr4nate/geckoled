@@ -11,6 +11,9 @@ int main() {
 	// Load config
 	load_config();
 
+	// Initialize library
+	ws2811_init(config->ledstring);
+
 	printf("Starting.\n");
 
 	setup_renderer();
