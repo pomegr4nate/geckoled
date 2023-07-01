@@ -54,3 +54,6 @@ dkms.conf
 # CLion
 .idea/
 .idea
+
+# Vim
+.*.swp
