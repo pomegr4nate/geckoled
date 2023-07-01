@@ -1,3 +1,6 @@
+#ifndef GECKOLED_CONFIG_H
+#define GECKOLED_CONFIG_H
+
 #include "../rpi_ws281x/ws2811.h"
 
 typedef struct config_t {
@@ -21,10 +24,12 @@ typedef struct config_t {
 } config_t;
 
 // Config
-static config_t* config;
+#ifndef _CONFIG_IMPL
+extern config_t* config;
+#endif
 
 void load_config();
 
 void free_config();
 
-char try_load_ini(const char *path);
+#endif

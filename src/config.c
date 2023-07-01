@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#define _CONFIG_IMPL
 #include "config.h"
+config_t* config;
 
 static const size_t MAX_LINE_LENGTH = 256;
 static const char *DEFAULT_PATHS[] =
@@ -17,7 +20,7 @@ static const int NUM_DEFAULT_PATHS =
 		sizeof(DEFAULT_PATHS) / sizeof(DEFAULT_PATHS[0]);
 
 char read_ini_line(char *key);
-
+char try_load_ini(const char *path);
 void trim_inplace(char *str);
 
 void load_config() {
