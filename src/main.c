@@ -1,8 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include "config.h"
 #include "handlers.h"
 #include "renderer.h"
+#include "ws2811.h"
+#include "cycle.h"
 
 int main() {
 	// Setup kill handlers
@@ -16,7 +19,10 @@ int main() {
 
 	printf("Starting.\n");
 
+	config->running = 1;
+
 	setup_renderer();
+	run_daynight_cycle();
 
 	exit(0);
 }

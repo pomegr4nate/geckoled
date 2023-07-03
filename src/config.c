@@ -25,9 +25,10 @@ void trim_inplace(char *str);
 
 void load_config() {
 	config = malloc(sizeof(config_t));
-	config->ledstring = malloc(sizeof(ws2811_t));
 
 	memset(config, 0, sizeof(config_t));
+
+	config->ledstring = malloc(sizeof(ws2811_t));
 
 	// Default values
 	config->width = 1;
